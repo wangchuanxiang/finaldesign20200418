@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration    
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"    
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+	<properties resource="application.properties"></properties>
+
+	<context id="default" targetRuntime="MyBatis3">
+		<!-- 生成的pojo，将implements Serializable -->
+		<plugin type="org.mybatis.generator.plugins.SerializablePlugin"></plugin>
+		<commentGenerator>
+			<!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+			<property name="suppressAllComments" value="true" />
+		</commentGenerator>
+
+		<!-- 数据库链接URL、用户名、密码 -->
+		<jdbcConnection
+			driverClass="${spring.datasource.driver-class-name}"
+			connectionURL="${spring.datasource.url}"
+			userId="${spring.datasource.username}"
+			password="${spring.datasource.password}">
+		</jdbcConnection>
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+
+		<javaModelGenerator
+			targetPackage="com.finaldesign.dao.entity"
+			targetProject="finaldesign20200418/src/main/java">
+			<property name="enableSubPackages" value="true" />
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+
+		<!--对应的mapper.xml文件 -->
+		<sqlMapGenerator targetPackage="mapper"
+			targetProject="finaldesign20200418/src/main/resources">
+			<property name="enableSubPackages" value="true" />
+		</sqlMapGenerator>
+
+		<!-- 对应的Mapper接口类文件 -->
+		<javaClientGenerator type="XMLMAPPER"
+			targetPackage="com.finaldesign.dao.mapper"
+			targetProject="finaldesign20200418/src/main/java">
+			<property name="enableSubPackages" value="true" />
+		</javaClientGenerator>
+
+		<table tableName="meeting" enableCountByExample="false"
+			enableUpdateByExample="false" enableDeleteByExample="false"
+			enableSelectByExample="false" selectByExampleQueryId="false"
+			enableSelectByPrimaryKey="true" enableUpdateByPrimaryKey="true"
+			enableDeleteByPrimaryKey="true">
+			<generatedKey column="id" sqlStatement="MySql"
+				identity="true" />
+		</table>
+		<table tableName="meeting_log" enableCountByExample="false"
+			enableUpdateByExample="false" enableDeleteByExample="false"
+			enableSelectByExample="false" selectByExampleQueryId="false"
+			enableSelectByPrimaryKey="true" enableUpdateByPrimaryKey="true"
+			enableDeleteByPrimaryKey="true">
+			<generatedKey column="id" sqlStatement="MySql"
+				identity="true" />
+		</table>
+		<table tableName="s_user" enableCountByExample="false"
+			enableUpdateByExample="false" enableDeleteByExample="false"
+			enableSelectByExample="false" selectByExampleQueryId="false"
+			enableSelectByPrimaryKey="true" enableUpdateByPrimaryKey="true"
+			enableDeleteByPrimaryKey="true">
+			<generatedKey column="id" sqlStatement="MySql"
+				identity="true" />
+		</table>
+	</context>
+</generatorConfiguration>
