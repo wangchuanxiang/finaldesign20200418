@@ -1,0 +1,190 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>会议管理系统</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="" />
+<link href="css/bootstrap.css" rel="stylesheet" type="text/css" />
+<link href="css/bootstrap-table.min.css" rel="stylesheet"
+	type="text/css" />
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+<link href="css/font-awesome.css" rel="stylesheet">
+<link href="css/SidebarNav.min.css" rel="stylesheet" type="text/css" />
+<link href="css/custom.css" rel="stylesheet">
+<link href="css/owl.carousel.css" rel="stylesheet">
+</head>
+<body class="cbp-spmenu-push">
+	<div class="main-content">
+		<div class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left"
+			id="cbp-spmenu-s1">
+			<!--left-fixed -navigation-->
+			<aside class="sidebar-left">
+				<nav class="navbar navbar-inverse">
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle collapsed"
+							data-toggle="collapse" data-target=".collapse"
+							aria-expanded="false">
+							<span class="sr-only">Toggle navigation</span> <span
+								class="icon-bar"></span> <span class="icon-bar"></span> <span
+								class="icon-bar"></span>
+						</button>
+						<h1>
+							<a class="navbar-brand" href="index.html"><span
+								class="fa fa-area-chart"></span> 会议管理系统<span
+								class="dashboard_text"></span></a>
+						</h1>
+					</div>
+					<div class="collapse navbar-collapse"
+						id="bs-example-navbar-collapse-1">
+						<ul class="sidebar-menu">
+							<li class="header">Hello,欢迎登陆</li>
+							<li class="treeview"><a href="meeting_log.html"> <i
+									class="fa fa-dashboard"></i> <span>打卡记录</span>
+							</a></li>
+							<li class="treeview"><a href="meeting.html"> <i
+									class="fa fa-dashboard"></i> <span>会议管理</span>
+							</a></li>
+							<li class="treeview"><a href="user.html"> <i
+									class="fa fa-dashboard"></i> <span>人员管理</span>
+							</a></li>
+						</ul>
+					</div>
+				</nav>
+			</aside>
+		</div>
+		<!--left-fixed -navigation-->
+
+		<!-- header-starts -->
+		<div class="sticky-header header-section ">
+			<div class="header-left" style="height: 62px;"></div>
+		</div>
+		<div id="page-wrapper">
+			<div class="main-page">
+				<div class="grids widget-shadow">
+					<div class="row">
+						<div class="pull-left">
+							<button type="button" class="btn btn-primary" data-toggle="modal"
+								data-target="#modal_create_user">添加用户</button>
+						</div>
+						<table id="all_user_table"></table>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--footer-->
+		<div class="footer">
+			<p>Copyright &copy; 2018.CWL基于百度AI平台的人脸识别研究</p>
+		</div>
+		<!--//footer-->
+	</div>
+
+	<div class="modal fade" id="modal_create_user" tabindex="-1"
+		role="dialog" aria-hidden="true">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<h4 class="modal-title">添加用户</h4>
+				</div>
+				<div class="modal-body">
+					<div class="form-horizontal row">
+						<div class="form-group">
+							<div style="width: 150px; height: 150px; margin: 0 auto;">
+								<div class="pull-right" style="position: relative;">
+									<label style="position: absolute; cursor: pointer;"
+										for="create_user_photo"><span
+										class="glyphicon glyphicon-edit"></span></label> <input class="hidden"
+										type="file" id="create_user_photo">
+								</div>
+								<img id="show_img" class="hidden" src=""
+									style="width: 100%; height: 100%; border: 1px solid #bbb; border-radius: 50%;">
+								<canvas id="show_canvas"
+									style="width: 100%; height: 100%; border: 1px solid #bbb; border-radius: 50%;"></canvas>
+								<video class="hidden" id="video" src=""
+									style="width: 200px; height: 100px;"></video>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">用户姓名</label>
+							<div class="col-sm-7">
+								<input type="text" class="form-control" id="s_name"
+									placeholder="请输入用户姓名">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">用户年龄</label>
+							<div class="col-sm-7">
+								<input type="text" class="form-control" id="s_age"
+									placeholder="请输入用户年龄">
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭弹框</button>
+					<button type="button" class="btn btn-primary">添加用户</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="modal_update_user" tabindex="-1"
+		role="dialog" aria-hidden="true">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<h4 class="modal-title">添加用户</h4>
+				</div>
+				<div class="modal-body">
+					<div class="form-horizontal row">
+						<div class="form-group">
+							<div style="width: 150px; height: 150px; margin: 0 auto;">
+								<img alt="" src="images/1.jpg"
+									style="width: 100%; height: 100%; border-radius: 50%;">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">用户姓名</label>
+							<div class="col-sm-7">
+								<input type="text" class="form-control" id="s_name"
+									placeholder="请输入用户姓名">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">用户年龄</label>
+							<div class="col-sm-7">
+								<input type="text" class="form-control" id="s_age"
+									placeholder="请输入用户年龄">
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭弹框</button>
+					<button type="button" class="btn btn-primary">添加用户</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- js-->
+	<script src="js/jquery-1.11.1.min.js"></script>
+	<script src="js/bootstrap.js"></script>
+	<script src="js/bootstrap-table.min.js"></script>
+	<script src="js/bootstrap-table-zh-CN.js"></script>
+	<script src="js/modernizr.custom.js"></script>
+	<script src="js/metisMenu.min.js"></script>
+	<script src="js/custom.js"></script>
+	<script src="js/owl.carousel.js"></script>
+	<script src="js/utils.js"></script>
+	<script src="js/classie.js"></script>
+	<script src="js/jquery.nicescroll.js"></script>
+	<script src="js/scripts.js"></script>
+
+	<script src="pagejs/user.js"></script>
+</body>
+</html>

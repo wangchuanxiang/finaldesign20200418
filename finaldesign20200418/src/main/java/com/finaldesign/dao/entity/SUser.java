@@ -12,7 +12,7 @@ public class SUser implements Serializable {
 
     private String uName;
 
-    private String uPwd;
+    private String uTel;
 
     private static final long serialVersionUID = 1L;
 
@@ -48,12 +48,12 @@ public class SUser implements Serializable {
         this.uName = uName == null ? null : uName.trim();
     }
 
-    public String getuPwd() {
-        return uPwd;
+    public String getuTel() {
+        return uTel;
     }
 
-    public void setuPwd(String uPwd) {
-        this.uPwd = uPwd == null ? null : uPwd.trim();
+    public void setuTel(String uTel) {
+        this.uTel = uTel == null ? null : uTel.trim();
     }
 
     @Override
@@ -66,7 +66,7 @@ public class SUser implements Serializable {
         sb.append(", createTime=").append(createTime);
         sb.append(", updateTime=").append(updateTime);
         sb.append(", uName=").append(uName);
-        sb.append(", uPwd=").append(uPwd);
+        sb.append(", uTel=").append(uTel);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
@@ -88,7 +88,7 @@ public class SUser implements Serializable {
             && (this.getCreateTime() == null ? other.getCreateTime() == null : this.getCreateTime().equals(other.getCreateTime()))
             && (this.getUpdateTime() == null ? other.getUpdateTime() == null : this.getUpdateTime().equals(other.getUpdateTime()))
             && (this.getuName() == null ? other.getuName() == null : this.getuName().equals(other.getuName()))
-            && (this.getuPwd() == null ? other.getuPwd() == null : this.getuPwd().equals(other.getuPwd()));
+            && (this.getuTel() == null ? other.getuTel() == null : this.getuTel().equals(other.getuTel()));
     }
 
     @Override
@@ -99,7 +99,7 @@ public class SUser implements Serializable {
         result = prime * result + ((getCreateTime() == null) ? 0 : getCreateTime().hashCode());
         result = prime * result + ((getUpdateTime() == null) ? 0 : getUpdateTime().hashCode());
         result = prime * result + ((getuName() == null) ? 0 : getuName().hashCode());
-        result = prime * result + ((getuPwd() == null) ? 0 : getuPwd().hashCode());
+        result = prime * result + ((getuTel() == null) ? 0 : getuTel().hashCode());
         return result;
     }
 }

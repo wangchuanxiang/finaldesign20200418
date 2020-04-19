@@ -3,15 +3,13 @@ package com.finaldesign.dao.mapper;
 import com.finaldesign.dao.entity.Meeting;
 
 public interface MeetingMapper {
-    int deleteByPrimaryKey(Integer id);
+	int deleteByPrimaryKey(Integer id);
 
-    int insert(Meeting record);
+	int insert(Meeting record);
 
-    int insertSelective(Meeting record);
+	Meeting selectByPrimaryKey(Integer id);
 
-    Meeting selectByPrimaryKey(Integer id);
+	int updateByPrimaryKeySelective(Meeting record);
 
-    int updateByPrimaryKeySelective(Meeting record);
-
-    int updateByPrimaryKey(Meeting record);
+	int updateByPrimaryKey(Meeting record);
 }

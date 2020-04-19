@@ -3,15 +3,13 @@ package com.finaldesign.dao.mapper;
 import com.finaldesign.dao.entity.MeetingLog;
 
 public interface MeetingLogMapper {
-    int deleteByPrimaryKey(Integer id);
+	int deleteByPrimaryKey(Integer id);
 
-    int insert(MeetingLog record);
+	int insert(MeetingLog record);
 
-    int insertSelective(MeetingLog record);
+	MeetingLog selectByPrimaryKey(Integer id);
 
-    MeetingLog selectByPrimaryKey(Integer id);
+	int updateByPrimaryKeySelective(MeetingLog record);
 
-    int updateByPrimaryKeySelective(MeetingLog record);
-
-    int updateByPrimaryKey(MeetingLog record);
+	int updateByPrimaryKey(MeetingLog record);
 }

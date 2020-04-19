@@ -16,6 +16,8 @@ public class Meeting implements Serializable {
 
     private Date endTime;
 
+    private String comment;
+
     private static final long serialVersionUID = 1L;
 
     public Integer getId() {
@@ -66,6 +68,14 @@ public class Meeting implements Serializable {
         this.endTime = endTime;
     }
 
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment == null ? null : comment.trim();
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -78,6 +88,7 @@ public class Meeting implements Serializable {
         sb.append(", mName=").append(mName);
         sb.append(", beginTime=").append(beginTime);
         sb.append(", endTime=").append(endTime);
+        sb.append(", comment=").append(comment);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
@@ -100,7 +111,8 @@ public class Meeting implements Serializable {
             && (this.getUpdateTime() == null ? other.getUpdateTime() == null : this.getUpdateTime().equals(other.getUpdateTime()))
             && (this.getmName() == null ? other.getmName() == null : this.getmName().equals(other.getmName()))
             && (this.getBeginTime() == null ? other.getBeginTime() == null : this.getBeginTime().equals(other.getBeginTime()))
-            && (this.getEndTime() == null ? other.getEndTime() == null : this.getEndTime().equals(other.getEndTime()));
+            && (this.getEndTime() == null ? other.getEndTime() == null : this.getEndTime().equals(other.getEndTime()))
+            && (this.getComment() == null ? other.getComment() == null : this.getComment().equals(other.getComment()));
     }
 
     @Override
@@ -113,6 +125,7 @@ public class Meeting implements Serializable {
         result = prime * result + ((getmName() == null) ? 0 : getmName().hashCode());
         result = prime * result + ((getBeginTime() == null) ? 0 : getBeginTime().hashCode());
         result = prime * result + ((getEndTime() == null) ? 0 : getEndTime().hashCode());
+        result = prime * result + ((getComment() == null) ? 0 : getComment().hashCode());
         return result;
     }
 }
