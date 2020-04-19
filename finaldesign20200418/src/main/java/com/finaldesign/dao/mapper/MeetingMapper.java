@@ -1,6 +1,9 @@
 package com.finaldesign.dao.mapper;
 
+import java.util.Date;
 import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
 
 import com.finaldesign.dao.entity.Meeting;
 
@@ -10,8 +13,10 @@ public interface MeetingMapper {
 	int insert(Meeting record);
 
 	Meeting selectByPrimaryKey(Integer id);
-	
+
 	List<Meeting> selectAllMeeting();
+
+	List<Meeting> selectByTimeRange(@Param("beginTime") Date beginTime, @Param("endTime") Date endTime);
 
 	int updateByPrimaryKeySelective(Meeting record);
 

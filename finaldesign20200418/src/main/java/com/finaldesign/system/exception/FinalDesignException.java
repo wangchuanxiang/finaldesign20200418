@@ -16,6 +16,12 @@ public class FinalDesignException extends RuntimeException {
 		this.errMsg = errMsg;
 	}
 
+	public FinalDesignException(Integer errCode, String errMsg) {
+		super();
+		this.errCode = String.valueOf(errCode);
+		this.errMsg = errMsg;
+	}
+
 	public FinalDesignException(SystemErr systemErr) {
 		super();
 		this.errCode = systemErr.getErrCode();
