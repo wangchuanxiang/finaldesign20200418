@@ -11,21 +11,33 @@
 		<result column="u_name" jdbcType="VARCHAR" property="uName" />
 		<result column="u_tel" jdbcType="VARCHAR" property="uTel" />
 	</resultMap>
+	<resultMap extends="BaseResultMap" id="ResultMapWithBLOBs"
+		type="com.finaldesign.dao.entity.SUser">
+		<result column="u_photo" jdbcType="LONGVARCHAR"
+			property="uPhoto" />
+	</resultMap>
 	<sql id="Base_Column_List">
 		id, create_time, update_time, u_name, u_tel
 	</sql>
+	<sql id="Blob_Column_List">
+		u_photo
+	</sql>
 	<select id="selectByPrimaryKey"
-		parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
 		select
 		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
 		from s_user
 		where id = #{id,jdbcType=INTEGER}
 	</select>
-	<delete id="deleteByPrimaryKey"
-		parameterType="java.lang.Integer">
-		delete from s_user
-		where id = #{id,jdbcType=INTEGER}
-	</delete>
+	<select id="selectAllSUser" resultMap="ResultMapWithBLOBs">
+		select
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from s_user
+	</select>
 	<insert id="insert"
 		parameterType="com.finaldesign.dao.entity.SUser">
 		<selectKey keyProperty="id" order="AFTER"
@@ -33,11 +45,53 @@
 			SELECT LAST_INSERT_ID()
 		</selectKey>
 		insert into s_user (create_time, update_time, u_name,
-		u_tel)
-		values
-		(#{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP},
+		u_tel, u_photo)
+		values (#{createTime,jdbcType=TIMESTAMP},
+		#{updateTime,jdbcType=TIMESTAMP},
 		#{uName,jdbcType=VARCHAR},
-		#{uTel,jdbcType=VARCHAR})
+		#{uTel,jdbcType=VARCHAR}, #{uPhoto,jdbcType=LONGVARCHAR})
+	</insert>
+	<insert id="insertSelective"
+		parameterType="com.finaldesign.dao.entity.SUser">
+		<selectKey keyProperty="id" order="AFTER"
+			resultType="java.lang.Integer">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		insert into s_user
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="createTime != null">
+				create_time,
+			</if>
+			<if test="updateTime != null">
+				update_time,
+			</if>
+			<if test="uName != null">
+				u_name,
+			</if>
+			<if test="uTel != null">
+				u_tel,
+			</if>
+			<if test="uPhoto != null">
+				u_photo,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime != null">
+				#{updateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="uName != null">
+				#{uName,jdbcType=VARCHAR},
+			</if>
+			<if test="uTel != null">
+				#{uTel,jdbcType=VARCHAR},
+			</if>
+			<if test="uPhoto != null">
+				#{uPhoto,jdbcType=LONGVARCHAR},
+			</if>
+		</trim>
 	</insert>
 	<update id="updateByPrimaryKeySelective"
 		parameterType="com.finaldesign.dao.entity.SUser">
@@ -55,7 +109,23 @@
 			<if test="uTel != null">
 				u_tel = #{uTel,jdbcType=VARCHAR},
 			</if>
+			<if test="uPhoto != null">
+				u_photo = #{uPhoto,jdbcType=LONGVARCHAR},
+			</if>
 		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKeyWithBLOBs"
+		parameterType="com.finaldesign.dao.entity.SUser">
+		update s_user
+		set create_time =
+		#{createTime,jdbcType=TIMESTAMP},
+		update_time =
+		#{updateTime,jdbcType=TIMESTAMP},
+		u_name = #{uName,jdbcType=VARCHAR},
+		u_tel = #{uTel,jdbcType=VARCHAR},
+		u_photo =
+		#{uPhoto,jdbcType=LONGVARCHAR}
 		where id = #{id,jdbcType=INTEGER}
 	</update>
 	<update id="updateByPrimaryKey"
