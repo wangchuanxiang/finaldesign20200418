@@ -22,6 +22,14 @@
 		from meeting_log
 		where id = #{id,jdbcType=INTEGER}
 	</select>
+	<select id="selectByMeetingAndSUser" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from meeting_log
+		where s_user_id = #{sUserId,jdbcType=INTEGER}
+		and
+		meeting_id = #{meetingId,jdbcType=INTEGER}
+	</select>
 	<select id="selectAllMeetingLog" resultMap="BaseResultMap">
 		select
 		<include refid="Base_Column_List" />

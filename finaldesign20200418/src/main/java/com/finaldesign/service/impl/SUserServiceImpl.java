@@ -28,6 +28,9 @@ public class SUserServiceImpl implements SUserService {
 		sUserMapper.insert(sUser);
 
 		HashMap<String, String> options = new HashMap<>();
+		options.put("quality_control", "LOW");
+		options.put("liveness_control", "NONE");
+		options.put("action_type", "APPEND");
 		String imagePhoto = sUser.getuPhoto().replaceAll(PRE, "");
 		String userId = "userid_" + String.valueOf(sUser.getId());
 		JSONObject createUserObj = aipFace.addUser(imagePhoto, "BASE64", DefaultGroup.DEFAULT.getGroupId(), userId,

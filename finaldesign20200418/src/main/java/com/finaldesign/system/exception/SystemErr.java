@@ -15,6 +15,10 @@ public enum SystemErr {
 	
 	MEETING_EXISTED("0006", "会议已存在"),
 	
+	NOT_FIND_ACTIVE_MEETING("0007", "未找到有效的会议"),
+	
+	CLOCK_IN_EXISTED("0008", "已完成会议打卡")
+	
 	;
 
 	private final String errCode;

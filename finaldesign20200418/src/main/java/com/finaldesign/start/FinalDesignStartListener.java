@@ -36,8 +36,7 @@ public class FinalDesignStartListener implements ApplicationRunner {
 			aipFace.groupAdd(DefaultGroup.DEFAULT.getGroupId(), new HashMap<>());
 		}
 		
-		JSONObject rlt = aipFace.getGroupUsers(DefaultGroup.DEFAULT.getGroupId(), options);
-		System.err.println(rlt.toString());
+		aipFace.getGroupUsers(DefaultGroup.DEFAULT.getGroupId(), options);
 	}
 
 }

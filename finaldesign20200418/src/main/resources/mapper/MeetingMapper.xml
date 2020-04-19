@@ -33,6 +33,10 @@
 		from meeting
 		where id = #{id,jdbcType=INTEGER}
 	</select>
+	<select id="selectActiveMeeting" resultMap="BaseResultMap">
+		SELECT <include refid="Base_Column_List" />
+		 FROM meeting WHERE begin_time &lt; now() and end_time &gt; now()
+	</select>
 	<select id="selectAllMeeting" resultMap="BaseResultMap">
 		select
 		<include refid="Base_Column_List" />

@@ -15,6 +15,8 @@ public interface MeetingMapper {
 	Meeting selectByPrimaryKey(Integer id);
 
 	List<Meeting> selectAllMeeting();
+	
+	Meeting selectActiveMeeting();
 
 	List<Meeting> selectByTimeRange(@Param("beginTime") Date beginTime, @Param("endTime") Date endTime);
 
