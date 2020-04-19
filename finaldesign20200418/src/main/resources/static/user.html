@@ -9,6 +9,7 @@
 <link href="css/bootstrap-table.min.css" rel="stylesheet"
 	type="text/css" />
 <link href="css/style.css" rel="stylesheet" type="text/css" />
+<link href="css/toastr.min.css" rel="stylesheet" type="text/css" />
 <link href="css/font-awesome.css" rel="stylesheet">
 <link href="css/SidebarNav.min.css" rel="stylesheet" type="text/css" />
 <link href="css/custom.css" rel="stylesheet">
@@ -79,6 +80,15 @@
 		<!--//footer-->
 	</div>
 
+	<div id="hidden" class="hidden">
+		<div class="op">
+			<a class="glyphicon glyphicon-trash"
+				style="color: red; margin-right: 15px; cursor: pointer;"></a> <a
+				class="glyphicon glyphicon-edit"
+				style="color: green; cursor: pointer;"></a>
+		</div>
+	</div>
+
 	<div class="modal fade" id="modal_create_user" tabindex="-1"
 		role="dialog" aria-hidden="true">
 		<div class="modal-dialog modal-lg">
@@ -98,38 +108,38 @@
 										class="glyphicon glyphicon-edit"></span></label> <input class="hidden"
 										type="file" id="create_user_photo">
 								</div>
-								<img id="show_img" class="hidden" src=""
+								<img id="create_user_show_img" class="hidden" src=""
 									style="width: 100%; height: 100%; border: 1px solid #bbb; border-radius: 50%;">
-								<canvas id="show_canvas"
+								<canvas id="create_user_show_canvas"
 									style="width: 100%; height: 100%; border: 1px solid #bbb; border-radius: 50%;"></canvas>
-								<video class="hidden" id="video" src=""
+								<video class="hidden" id="create_user_video" src=""
 									style="width: 200px; height: 100px;"></video>
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-sm-3 control-label">用户姓名</label>
 							<div class="col-sm-7">
-								<input type="text" class="form-control" id="s_name"
+								<input type="text" class="form-control s_name"
 									placeholder="请输入用户姓名">
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="col-sm-3 control-label">用户年龄</label>
+							<label class="col-sm-3 control-label">联系方式</label>
 							<div class="col-sm-7">
-								<input type="text" class="form-control" id="s_age"
-									placeholder="请输入用户年龄">
+								<input type="text" class="form-control s_tel"
+									placeholder="请输入用户联系方式">
 							</div>
 						</div>
 					</div>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">关闭弹框</button>
-					<button type="button" class="btn btn-primary">添加用户</button>
+					<button type="button" class="btn btn-primary" id="create_user">添加用户</button>
 				</div>
 			</div>
 		</div>
 	</div>
-
+	
 	<div class="modal fade" id="modal_update_user" tabindex="-1"
 		role="dialog" aria-hidden="true">
 		<div class="modal-dialog modal-lg">
@@ -137,35 +147,65 @@
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"
 						aria-hidden="true">&times;</button>
-					<h4 class="modal-title">添加用户</h4>
+					<h4 class="modal-title">更新用户</h4>
 				</div>
 				<div class="modal-body">
 					<div class="form-horizontal row">
 						<div class="form-group">
 							<div style="width: 150px; height: 150px; margin: 0 auto;">
-								<img alt="" src="images/1.jpg"
-									style="width: 100%; height: 100%; border-radius: 50%;">
+								<div class="pull-right" style="position: relative;">
+									<label style="position: absolute; cursor: pointer;"
+										for="update_user_photo"><span
+										class="glyphicon glyphicon-edit"></span></label> <input class="hidden"
+										type="file" id="update_user_photo">
+								</div>
+								<img id="update_user_show_img" class="hidden" src=""
+									style="width: 100%; height: 100%; border: 1px solid #bbb; border-radius: 50%;">
+								<canvas id="update_user_show_canvas"
+									style="width: 100%; height: 100%; border: 1px solid #bbb; border-radius: 50%;"></canvas>
+								<video class="hidden" id="update_user_video" src=""
+									style="width: 200px; height: 100px;"></video>
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-sm-3 control-label">用户姓名</label>
 							<div class="col-sm-7">
-								<input type="text" class="form-control" id="s_name"
+								<input type="text" class="form-control s_name"
 									placeholder="请输入用户姓名">
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="col-sm-3 control-label">用户年龄</label>
+							<label class="col-sm-3 control-label">联系方式</label>
 							<div class="col-sm-7">
-								<input type="text" class="form-control" id="s_age"
-									placeholder="请输入用户年龄">
+								<input type="text" class="form-control s_tel"
+									placeholder="请输入用户联系方式">
 							</div>
 						</div>
 					</div>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">关闭弹框</button>
-					<button type="button" class="btn btn-primary">添加用户</button>
+					<button type="button" class="btn btn-primary" id="update_user">更新用户</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="modal_delete_user" tabindex="-1"
+		role="dialog" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<h4 class="modal-title">删除用户</h4>
+				</div>
+				<div class="modal-body">
+					<div>确认需要删除该用户？</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭弹框</button>
+					<button type="button" class="btn btn-primary" id="delete_user">删除用户</button>
 				</div>
 			</div>
 		</div>
@@ -181,6 +221,7 @@
 	<script src="js/custom.js"></script>
 	<script src="js/owl.carousel.js"></script>
 	<script src="js/utils.js"></script>
+	<script src="js/toastr.min.js"></script>
 	<script src="js/classie.js"></script>
 	<script src="js/jquery.nicescroll.js"></script>
 	<script src="js/scripts.js"></script>

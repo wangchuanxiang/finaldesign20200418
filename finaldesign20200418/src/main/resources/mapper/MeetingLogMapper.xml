@@ -8,10 +8,12 @@
 			property="createTime" />
 		<result column="s_user_id" jdbcType="INTEGER"
 			property="sUserId" />
+		<result column="meeting_id" jdbcType="INTEGER"
+			property="meetingId" />
 		<result column="ip_addr" jdbcType="VARCHAR" property="ipAddr" />
 	</resultMap>
 	<sql id="Base_Column_List">
-		id, create_time, s_user_id, ip_addr
+		id, create_time, s_user_id, meeting_id, ip_addr
 	</sql>
 	<select id="selectByPrimaryKey"
 		parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -19,6 +21,11 @@
 		<include refid="Base_Column_List" />
 		from meeting_log
 		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<select id="selectAllMeetingLog" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from meeting_log
 	</select>
 	<delete id="deleteByPrimaryKey"
 		parameterType="java.lang.Integer">
@@ -31,10 +38,11 @@
 			resultType="java.lang.Integer">
 			SELECT LAST_INSERT_ID()
 		</selectKey>
-		insert into meeting_log (create_time, s_user_id, ip_addr
+		insert into meeting_log (create_time, s_user_id, meeting_id, ip_addr
 		)
 		values
 		(#{createTime,jdbcType=TIMESTAMP}, #{sUserId,jdbcType=INTEGER},
+		#{meetingId,jdbcType=INTEGER},
 		#{ipAddr,jdbcType=VARCHAR}
 		)
 	</insert>
@@ -47,6 +55,9 @@
 			</if>
 			<if test="sUserId != null">
 				s_user_id = #{sUserId,jdbcType=INTEGER},
+			</if>
+			<if test="meetingId != null">
+				meeting_id = #{meetingId,jdbcType=INTEGER},
 			</if>
 			<if test="ipAddr != null">
 				ip_addr = #{ipAddr,jdbcType=VARCHAR},
@@ -61,6 +72,8 @@
 		#{createTime,jdbcType=TIMESTAMP},
 		s_user_id =
 		#{sUserId,jdbcType=INTEGER},
+		meeting_id =
+		#{meetingId,jdbcType=INTEGER},
 		ip_addr = #{ipAddr,jdbcType=VARCHAR}
 		where
 		id = #{id,jdbcType=INTEGER}

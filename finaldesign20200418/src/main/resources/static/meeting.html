@@ -12,6 +12,8 @@
 <link href="css/font-awesome.css" rel="stylesheet">
 <link href="css/SidebarNav.min.css" rel="stylesheet" type="text/css" />
 <link href="css/custom.css" rel="stylesheet">
+<link href="css/custom.css" rel="stylesheet">
+<link href="css/bootstrap-datetimepicker.min.css" rel="stylesheet">
 <link href="css/owl.carousel.css" rel="stylesheet">
 </head>
 <body class="cbp-spmenu-push">
@@ -92,28 +94,28 @@
 						<div class="form-group">
 							<label class="col-sm-3 control-label">会议名称</label>
 							<div class="col-sm-7">
-								<input type="text" class="form-control" id="meeting_name"
+								<input type="text" class="form-control meeting_name"
 									placeholder="请输入会议名称">
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-sm-3 control-label">开始时间</label>
 							<div class="col-sm-7">
-								<input type="text" class="form-control" id="begin_time"
+								<input type="text" class="form-control begin_time"
 									placeholder="请输入开始时间">
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-sm-3 control-label">结束时间</label>
 							<div class="col-sm-7">
-								<input type="text" class="form-control" id="end_time"
+								<input type="text" class="form-control end_time"
 									placeholder="请输入结束时间">
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-sm-3 control-label">会议备注</label>
 							<div class="col-sm-7">
-								<textarea id="comment" class="form-control" rows="3" cols=""
+								<textarea class="form-control comment" rows="3" cols=""
 									placeholder="请输入会议备注"></textarea>
 							</div>
 						</div>
@@ -121,9 +123,86 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">关闭弹框</button>
-					<button type="button" class="btn btn-primary">添加会议</button>
+					<button type="button" class="btn btn-primary" id="create_meeting">添加会议</button>
 				</div>
 			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="modal_update_meeting" tabindex="-1"
+		role="dialog" aria-hidden="true">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<h4 class="modal-title">更新会议</h4>
+				</div>
+				<div class="modal-body">
+					<div class="form-horizontal row">
+						<div class="form-group">
+							<label class="col-sm-3 control-label">会议名称</label>
+							<div class="col-sm-7">
+								<input type="text" class="form-control meeting_name"
+									placeholder="请输入会议名称">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">开始时间</label>
+							<div class="col-sm-7">
+								<input type="text" class="form-control begin_time"
+									placeholder="请输入开始时间">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">结束时间</label>
+							<div class="col-sm-7">
+								<input type="text" class="form-control end_time"
+									placeholder="请输入结束时间">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">会议备注</label>
+							<div class="col-sm-7">
+								<textarea class="form-control comment" rows="3" cols=""
+									placeholder="请输入会议备注"></textarea>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭弹框</button>
+					<button type="button" class="btn btn-primary" id="update_meeting">更新会议</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="modal_delete_meeting" tabindex="-1"
+		role="dialog" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<h4 class="modal-title">删除会议</h4>
+				</div>
+				<div class="modal-body">
+					<div>确认需要删除该会议？</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭弹框</button>
+					<button type="button" class="btn btn-primary" id="delete_meeting">删除会议</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="hidden" class="hidden">
+		<div class="op">
+			<a class="glyphicon glyphicon-trash"
+				style="color: red; margin-right: 15px; cursor: pointer;"></a> <a
+				class="glyphicon glyphicon-edit"
+				style="color: green; cursor: pointer;"></a>
 		</div>
 	</div>
 
@@ -132,6 +211,8 @@
 	<script src="js/bootstrap.js"></script>
 	<script src="js/bootstrap-table.min.js"></script>
 	<script src="js/bootstrap-table-zh-CN.js"></script>
+	<script src="js/bootstrap-datetimepicker.min.js"></script>
+	<script src="js/bootstrap-datetimepicker.zh-CN.js"></script>
 	<script src="js/modernizr.custom.js"></script>
 	<script src="js/metisMenu.min.js"></script>
 	<script src="js/custom.js"></script>

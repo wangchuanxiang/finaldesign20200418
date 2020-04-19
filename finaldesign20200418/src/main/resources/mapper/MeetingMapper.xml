@@ -26,6 +26,11 @@
 		from meeting
 		where id = #{id,jdbcType=INTEGER}
 	</select>
+	<select id="selectAllMeeting" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from meeting
+	</select>
 	<delete id="deleteByPrimaryKey"
 		parameterType="java.lang.Integer">
 		delete from meeting

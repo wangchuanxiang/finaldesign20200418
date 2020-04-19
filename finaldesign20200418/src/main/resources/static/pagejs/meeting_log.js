@@ -2,12 +2,14 @@
  * 
  */
 $(function() {
-    initMeetingLogTable();
+    var $meetingLogId = null;
+    var meetingLogUrl = "http://localhost:8888/meeting_log/";
 
+    initMeetingLogTable();
     function initMeetingLogTable() {
 	$('#all_meeting_log_table').bootstrapTable('destroy').bootstrapTable({
-	    url : '/B_Product/GetProductData', // 请求后台的URL（*）
-	    method : 'get', // 请求方式（*）
+	    url : meetingLogUrl + 'query_all_meeting_log', // 请求后台的URL（*）
+	    method : 'post', // 请求方式（*）
 	    toolbar : '#toolbar', // 工具按钮用哪个容器
 	    striped : true, // 是否显示行间隔色
 	    cache : false, // 是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
@@ -36,21 +38,36 @@ $(function() {
 	    queryParams : function(params) {
 		return {};
 	    },
+	    responseHandler : function(res) { // res 后台给你返回的数据
+		return {
+		    rows : res.result,
+		// total : res.total
+		}
+	    },
 	    columns : [ {
-		field : 'seq',
+		field : 'id',
 		title : '序列',
 	    }, {
-		field : 'meeting_name',
+		field : 'createTime',
+		title : '创建时间',
+		formatter : function(value, row, index) {
+		    return timeStampString(new Date(row.createTime));
+		}
+	    }, {
+		field : 'uName',
 		title : '会议名称',
+		formatter : function(value, row, index) {
+		    return row.meeting.mName;
+		}
 	    }, {
 		field : 'user',
 		title : '打卡用户',
+		formatter : function(value, row, index) {
+		    return row.sUser.uName;
+		}
 	    }, {
-		field : 'ip',
+		field : 'ipAddr',
 		title : '打卡IP',
-	    }, {
-		field : 'op',
-		title : '操作',
 	    } ]
 	});
     }

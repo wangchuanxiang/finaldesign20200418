@@ -51,6 +51,11 @@
 		#{uName,jdbcType=VARCHAR},
 		#{uTel,jdbcType=VARCHAR}, #{uPhoto,jdbcType=LONGVARCHAR})
 	</insert>
+	<delete id="deleteByPrimaryKey"
+		parameterType="java.lang.Integer">
+		delete from s_user
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
 	<insert id="insertSelective"
 		parameterType="com.finaldesign.dao.entity.SUser">
 		<selectKey keyProperty="id" order="AFTER"

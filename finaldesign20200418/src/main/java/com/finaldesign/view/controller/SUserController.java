@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,39 +27,39 @@ public class SUserController {
 		sUser.setCreateTime(new Date());
 		sUser.setUpdateTime(new Date());
 		sUser.setuName(uName);
-		sUser.setuPhoto(telephone);
+		sUser.setuPhoto(photo);
 		sUser.setuTel(telephone);
 		sUserService.createSUser(sUser);
 
 		return ResponseUtil.getResponseRlt();
 	}
 
-	@GetMapping("delete_one_suser")
+	@PostMapping("delete_one_suser")
 	public Map<Object, Object> deleteOneSUser(Integer sUserId) {
 		sUserService.deleteSUser(sUserId);
 		return ResponseUtil.getResponseRlt();
 	}
 
-	@GetMapping("update_one_suser")
+	@PostMapping("update_one_suser")
 	public Map<Object, Object> updateOneSUser(@RequestParam Integer sUserId, String uName, String telephone,
 			String photo) {
 		SUser sUser = new SUser();
 		sUser.setId(sUserId);
 		sUser.setUpdateTime(new Date());
 		sUser.setuName(uName);
-		sUser.setuPhoto(telephone);
+		sUser.setuPhoto(photo);
 		sUser.setuTel(telephone);
 		sUserService.updateSUser(sUser);
 		return ResponseUtil.getResponseRlt();
 	}
 
-	@GetMapping("query_one_suser")
+	@PostMapping("query_one_suser")
 	public Map<Object, Object> queryOneSUser(Integer sUserId) {
 		SUser rlt = sUserService.querySUser(sUserId);
 		return ResponseUtil.getResponseRlt(rlt);
 	}
 
-	@GetMapping("query_all_suser")
+	@PostMapping("query_all_suser")
 	public Map<Object, Object> queryAllSUser() {
 		List<SUser> rlt = sUserService.queryAllSUser();
 		return ResponseUtil.getResponseRlt(rlt);

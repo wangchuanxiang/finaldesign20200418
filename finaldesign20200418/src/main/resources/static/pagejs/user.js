@@ -2,26 +2,114 @@
  * 
  */
 $(function() {
+    var $userId = null;
+    var sUserUrl = "http://localhost:8888/s_user/";
+
     $('#modal_create_user').on('show.bs.modal', function() {
+	$('#modal_create_user').find('.s_name').val('');
+	$('#modal_create_user').find('.s_tel').val('');
+	$('#create_user_show_img').addClass('hidden');
+	$('#create_user_show_canvas').removeClass('hidden');
 	initCreateUserModel();
     });
 
-    initUserTable();
+    $('#modal_update_user').on('show.bs.modal', function() {
+	$('#update_user_show_img').addClass('hidden');
+	$('#update_user_show_canvas').removeClass('hidden');
+	initUpdateUserModel();
+    });
+
     $('#create_user_photo').on('change', function() {
 	var file = $('#create_user_photo')[0].files[0];
 	var reader = new FileReader();
 	reader.onload = function(e) {
-	    var img = $('#show_img')[0];
+	    var img = $('#create_user_show_img')[0];
 	    img.src = e.target.result;
 	}
 	reader.readAsDataURL(file);
-	
-	$('#show_img').removeClass('hidden');
-	$('#show_canvas').addClass('hidden');
+
+	$('#create_user_show_img').removeClass('hidden');
+	$('#create_user_show_canvas').addClass('hidden');
+    });
+
+    $('#update_user_photo').on('change', function() {
+	var file = $('#update_user_photo')[0].files[0];
+	var reader = new FileReader();
+	reader.onload = function(e) {
+	    var img = $('#update_user_show_img')[0];
+	    img.src = e.target.result;
+	}
+	reader.readAsDataURL(file);
+
+	$('#update_user_show_img').removeClass('hidden');
+	$('#update_user_show_canvas').addClass('hidden');
+    });
+    
+    $('#delete_user').on('click', function() {
+	$.post(sUserUrl + 'delete_one_suser', {
+	    sUserId : $userId
+	}, function(json) {
+	    if (json.code !== '0000') {
+		toastr.error(json.message, '删除用户失败');
+		return;
+	    }
+
+	    $('#modal_delete_user').modal('hide');
+	    $("#all_user_table").bootstrapTable('refresh');
+	}, 'json');
+    });
+
+    $('#create_user').on('click', function() {
+	var imgData = '';
+	if (!$("#create_user_show_img").hasClass('hidden')) {
+	    imgData = $('#create_user_show_img').prop('src');
+	} else if (!$('#create_user_show_canvas').hasClass('hidden')) {
+	    let canvas = document.getElementById('create_user_show_canvas');
+	    imgData = canvas.toDataURL("image/png");
+	}
+
+	$.post(sUserUrl + 'create_one_suser', {
+	    uName : $('#modal_create_user .s_name').val(),
+	    telephone : $('#modal_create_user .s_tel').val(),
+	    photo : imgData
+	}, function(json) {
+	    if (json.code !== '0000') {
+		toastr.error(json.message, '添加用户失败');
+		return;
+	    }
+
+	    $('#modal_create_user').modal('hide');
+	    $("#all_user_table").bootstrapTable('refresh');
+	}, 'json');
+    });
+
+    $('#update_user').on('click', function() {
+	var imgData = '';
+	if (!$("#update_user_show_img").hasClass('hidden')) {
+	    imgData = $('#update_user_show_img').prop('src');
+	} else if (!$('#update_user_show_canvas').hasClass('hidden')) {
+	    let canvas = document.getElementById('update_user_show_canvas');
+	    imgData = canvas.toDataURL("image/png");
+	}
+
+	$.post(sUserUrl + 'update_one_suser', {
+	    sUserId : $userId,
+	    uName : $('#modal_update_user .s_name').val(),
+	    telephone : $('#modal_update_user .s_tel').val(),
+	    photo : imgData
+	}, function(json) {
+	    if (json.code !== '0000') {
+		toastr.error(json.message, '更新用户失败');
+		return;
+	    }
+
+	    $('#modal_update_user').modal('hide');
+	    $("#all_user_table").bootstrapTable('refresh');
+	}, 'json');
     });
 
     function initCreateUserModel() {
-	var video = document.getElementById("video");
+	var video = document.getElementById("create_user_video");
 	let promise = navigator.mediaDevices.getUserMedia({
 	    video : {
 		width : 200,
@@ -34,7 +122,7 @@ $(function() {
 	    video.play();
 	    canvasPlay();
 	});
-	var canvas = document.getElementById('show_canvas');
+	var canvas = document.getElementById('create_user_show_canvas');
 	var ctx = canvas.getContext('2d');
 	function canvasPlay() {
 	    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
@@ -42,10 +130,33 @@ $(function() {
 	}
     }
 
+    function initUpdateUserModel() {
+	var video = document.getElementById("update_user_video");
+	let promise = navigator.mediaDevices.getUserMedia({
+	    video : {
+		width : 200,
+		height : 200
+	    },
+	    audio : true
+	});
+	promise.then(function(MediaStream) {
+	    video.srcObject = MediaStream;
+	    video.play();
+	    canvasPlay();
+	});
+	var canvas = document.getElementById('update_user_show_canvas');
+	var ctx = canvas.getContext('2d');
+	function canvasPlay() {
+	    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+	    setTimeout(canvasPlay, 150);
+	}
+    }
+
+    initUserTable();
     function initUserTable() {
 	$('#all_user_table').bootstrapTable('destroy').bootstrapTable({
-	    url : '/B_Product/GetProductData', // 请求后台的URL（*）
-	    method : 'get', // 请求方式（*）
+	    url : sUserUrl + 'query_all_suser', // 请求后台的URL（*）
+	    method : 'post', // 请求方式（*）
 	    toolbar : '#toolbar', // 工具按钮用哪个容器
 	    striped : true, // 是否显示行间隔色
 	    cache : false, // 是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
@@ -74,21 +185,51 @@ $(function() {
 	    queryParams : function(params) {
 		return {};
 	    },
+	    responseHandler : function(res) { // res 后台给你返回的数据
+		return {
+		    rows : res.result,
+		// total : res.total
+		}
+	    },
 	    columns : [ {
-		field : 'seq',
+		field : 'id',
 		title : '序列',
 	    }, {
-		field : 'name',
-		title : '姓名',
+		field : 'createTime',
+		title : '创建时间',
+		formatter : function(value, row, index) {
+		    return timeStampString(new Date(row.createTime));
+		}
 	    }, {
-		field : 'age',
-		title : '年龄',
+		field : 'uName',
+		title : '用户姓名',
 	    }, {
-		field : 'photo',
+		field : 'uTel',
+		title : '联系方式',
+	    }, {
+		field : 'uPhoto',
 		title : '图片',
+		formatter : function(value, row, index) {
+		    return '<img style="width: 60px;height: 60px;" src="' + row.uPhoto + '">';
+		},
 	    }, {
 		field : 'op',
 		title : '操作',
+		formatter : function(value, row, index) {
+		    return $('#hidden').find('.op').html();
+		},
+		events : {
+		    "click .glyphicon-edit" : function(e, value, row, index) {
+			$userId = row.id;
+			$('#modal_update_user').find('.s_name').val(row.uName);
+			$('#modal_update_user').find('.s_tel').val(row.uTel);
+			$('#modal_update_user').modal('show');
+		    },
+		    "click .glyphicon-trash" : function(e, value, row, index) {
+			$userId = row.id;
+			$('#modal_delete_user').modal('show');
+		    }
+		}
 	    } ]
 	});
     }

@@ -1,5 +1,7 @@
 package com.finaldesign.dao.mapper;
 
+import java.util.List;
+
 import com.finaldesign.dao.entity.MeetingLog;
 
 public interface MeetingLogMapper {
@@ -8,6 +10,8 @@ public interface MeetingLogMapper {
 	int insert(MeetingLog record);
 
 	MeetingLog selectByPrimaryKey(Integer id);
+	
+	List<MeetingLog> selectAllMeetingLog();
 
 	int updateByPrimaryKeySelective(MeetingLog record);
 
