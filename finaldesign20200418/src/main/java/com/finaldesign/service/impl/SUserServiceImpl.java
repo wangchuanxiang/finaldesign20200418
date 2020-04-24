@@ -17,7 +17,7 @@ import com.finaldesign.system.exception.SystemErr;
 
 @Service
 public class SUserServiceImpl implements SUserService {
-	private static final String PRE = "data:image/jpeg;base64,";
+	private static final String PRE = "data:image/png;base64,";
 	@Autowired
 	private SUserMapper sUserMapper;
 	@Autowired
@@ -29,8 +29,9 @@ public class SUserServiceImpl implements SUserService {
 
 		HashMap<String, String> options = new HashMap<>();
 		options.put("quality_control", "LOW");
-		options.put("liveness_control", "NONE");
-		options.put("action_type", "APPEND");
+		options.put("liveness_control", "LOW");
+		options.put("action_type", "REPLACE");
+		sUser.getuPhoto().indexOf(PRE);
 		String imagePhoto = sUser.getuPhoto().replaceAll(PRE, "");
 		String userId = "userid_" + String.valueOf(sUser.getId());
 		JSONObject createUserObj = aipFace.addUser(imagePhoto, "BASE64", DefaultGroup.DEFAULT.getGroupId(), userId,

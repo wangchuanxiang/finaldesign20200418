@@ -2,6 +2,7 @@ package com.finaldesign.service;
 
 import java.util.List;
 
+import com.finaldesign.dao.entity.SUser;
 import com.finaldesign.response.entity.MeetingLogDetail;
 
 public interface MeetingLogService {
@@ -10,5 +11,5 @@ public interface MeetingLogService {
 
 	List<MeetingLogDetail> queryAllMeetingLog();
 
-	void clockInMeeting(String ipAddr, String photo);
+	SUser clockInMeeting(String ipAddr, String photo);
 }

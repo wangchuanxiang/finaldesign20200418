@@ -7,8 +7,8 @@ $(function() {
     let video = document.getElementById("video");
     let constraints = {
 	video : {
-	    width : 200,
-	    height : 100
+	    width : 600,
+	    height : 600
 	},
 	audio : true
     };
@@ -35,8 +35,10 @@ $(function() {
 	}, function(json) {
 	    if(json.code !== '0000') {
 		toastr.error(json.message, '打卡失败');
+		setTimeout(clickInMeeting, 1500);
 	    }
-	    setTimeout(clickInMeeting, 1500);
+	    
+	    toastr.success('您好，' + json.result.uName, '打卡成功');
 	}, 'json');
     }
 });

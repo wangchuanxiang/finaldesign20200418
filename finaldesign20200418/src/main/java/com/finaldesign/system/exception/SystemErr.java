@@ -17,7 +17,7 @@ public enum SystemErr {
 	
 	NOT_FIND_ACTIVE_MEETING("0007", "未找到有效的会议"),
 	
-	CLOCK_IN_EXISTED("0008", "已完成会议打卡")
+	CLOCK_IN_EXISTED("0008", "您已经成功打过卡")
 	
 	;
 

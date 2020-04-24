@@ -65,7 +65,11 @@ $(function() {
 	    imgData = $('#create_user_show_img').prop('src');
 	} else if (!$('#create_user_show_canvas').hasClass('hidden')) {
 	    let canvas = document.getElementById('create_user_show_canvas');
-	    imgData = canvas.toDataURL("image/png");
+	    canvas.mozImageSmoothingEnabled = false;
+	    canvas.webkitImageSmoothingEnabled = false;
+	    canvas.msImageSmoothingEnabled = false;
+	    canvas.imageSmoothingEnabled = false;
+	    imgData = canvas.toDataURL("image/png", 1);
 	}
 
 	$.post(sUserUrl + 'create_one_suser', {
@@ -89,7 +93,11 @@ $(function() {
 	    imgData = $('#update_user_show_img').prop('src');
 	} else if (!$('#update_user_show_canvas').hasClass('hidden')) {
 	    let canvas = document.getElementById('update_user_show_canvas');
-	    imgData = canvas.toDataURL("image/png");
+	    canvas.mozImageSmoothingEnabled = false;
+	    canvas.webkitImageSmoothingEnabled = false;
+	    canvas.msImageSmoothingEnabled = false;
+	    canvas.imageSmoothingEnabled = false;
+	    imgData = canvas.toDataURL("image/png", 1);
 	}
 
 	$.post(sUserUrl + 'update_one_suser', {
@@ -112,8 +120,8 @@ $(function() {
 	var video = document.getElementById("create_user_video");
 	let promise = navigator.mediaDevices.getUserMedia({
 	    video : {
-		width : 200,
-		height : 200
+		width : 150,
+		height : 150
 	    },
 	    audio : true
 	});
@@ -134,8 +142,8 @@ $(function() {
 	var video = document.getElementById("update_user_video");
 	let promise = navigator.mediaDevices.getUserMedia({
 	    video : {
-		width : 200,
-		height : 200
+		width : 150,
+		height : 150
 	    },
 	    audio : true
 	});

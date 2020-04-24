@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.finaldesign.dao.entity.SUser;
 import com.finaldesign.response.entity.MeetingLogDetail;
 import com.finaldesign.service.MeetingLogService;
 import com.finaldesign.system.util.RequestUtil;
@@ -25,8 +26,8 @@ public class MeetingLogController {
 	@PostMapping("clock_in_meeting")
 	public Map<Object, Object> clockInMeeting(HttpServletRequest request, @RequestParam String photo) {
 		String ipAddr = RequestUtil.getIPAddress(request);
-		meetingLogService.clockInMeeting(ipAddr, photo);
-		return ResponseUtil.getResponseRlt();
+		SUser rlt = meetingLogService.clockInMeeting(ipAddr, photo);
+		return ResponseUtil.getResponseRlt(rlt);
 	}
 
 	@PostMapping("query_one_meeting_log")

@@ -25,7 +25,7 @@ import com.finaldesign.system.exception.SystemErr;
 
 @Service
 public class MeetingLogServiceImpl implements MeetingLogService {
-	private static final String PRE = "data:image/jpeg;base64,";
+	private static final String PRE = "data:image/png;base64,";
 	@Autowired
 	private MeetingLogMapper meetingLogMapper;
 	@Autowired
@@ -60,7 +60,7 @@ public class MeetingLogServiceImpl implements MeetingLogService {
 	}
 
 	@Override
-	public void clockInMeeting(String ipAddr, String photo) {
+	public SUser clockInMeeting(String ipAddr, String photo) {
 		Meeting activeMeeting = meetingMapper.selectActiveMeeting();
 		if (activeMeeting == null)
 			throw new FinalDesignException(SystemErr.NOT_FIND_ACTIVE_MEETING);
@@ -96,6 +96,8 @@ public class MeetingLogServiceImpl implements MeetingLogService {
 		meetingLog.setsUserId(loadSUser.getId());
 		meetingLog.setIpAddr(ipAddr);
 		meetingLogMapper.insert(meetingLog);
+		
+		return loadSUser;
 	}
 
 }

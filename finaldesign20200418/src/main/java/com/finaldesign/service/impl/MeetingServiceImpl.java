@@ -42,12 +42,9 @@ public class MeetingServiceImpl implements MeetingService {
 		if (loadMeeting == null)
 			throw new FinalDesignException(SystemErr.MEETING_NOT_EXISTED);
 
-		meetingMapper.deleteByPrimaryKey(meeting.getId());
 		List<Meeting> allActiveMeeting = meetingMapper.selectByTimeRange(meeting.getBeginTime(), meeting.getEndTime());
-		if (!allActiveMeeting.isEmpty())
+		if (allActiveMeeting.size() > 1 && !allActiveMeeting.get(0).getId().equals(meeting.getId()))
 			throw new FinalDesignException(SystemErr.CURRENT_EXISTED_MEETING);
-		meetingMapper.insert(loadMeeting);
-
 		meetingMapper.updateByPrimaryKeySelective(meeting);
 	}
 

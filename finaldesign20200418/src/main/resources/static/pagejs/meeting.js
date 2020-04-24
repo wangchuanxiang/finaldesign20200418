@@ -15,7 +15,7 @@ $(function() {
     initPageContent();
     function initPageContent() {
 	$("#modal_create_meeting .begin_time").datetimepicker({
-	    format : 'yyyy-mm-dd mm:hh:ss',
+	    format : 'yyyy-mm-dd HH:ii:ss',
 	    language : 'zh-CN',
 	    autoclose : true
 	}).on('show', function(event) {
@@ -23,7 +23,7 @@ $(function() {
 	    event.stopPropagation();
 	});
 	$("#modal_create_meeting .end_time").datetimepicker({
-	    format : 'yyyy-mm-dd mm:hh:ss',
+	    format : 'yyyy-mm-dd HH:ii:ss',
 	    language : 'zh-CN',
 	    autoclose : true
 	}).on('show', function(event) {
@@ -32,7 +32,7 @@ $(function() {
 	});
 
 	$("#modal_update_meeting .begin_time").datetimepicker({
-	    format : 'yyyy-mm-dd mm:hh:ss',
+	    format : 'yyyy-mm-dd HH:ii:ss',
 	    language : 'zh-CN',
 	    autoclose : true
 	}).on('show', function(event) {
@@ -40,7 +40,7 @@ $(function() {
 	    event.stopPropagation();
 	});
 	$("#modal_update_meeting .end_time").datetimepicker({
-	    format : 'yyyy-mm-dd mm:hh:ss',
+	    format : 'yyyy-mm-dd HH:ii:ss',
 	    language : 'zh-CN',
 	    autoclose : true
 	}).on('show', function(event) {
