@@ -22,10 +22,10 @@ import com.finaldesign.response.entity.MeetingLogDetail;
 import com.finaldesign.service.MeetingLogService;
 import com.finaldesign.system.exception.FinalDesignException;
 import com.finaldesign.system.exception.SystemErr;
+import com.finaldesign.system.util.SystemUtil;
 
 @Service
 public class MeetingLogServiceImpl implements MeetingLogService {
-	private static final String PRE = "data:image/png;base64,";
 	@Autowired
 	private MeetingLogMapper meetingLogMapper;
 	@Autowired
@@ -69,7 +69,7 @@ public class MeetingLogServiceImpl implements MeetingLogService {
 		options.put("match_threshold", "80");
 		options.put("quality_control", "LOW");
 
-		String imagePhoto = photo.replaceAll(PRE, "");
+		String imagePhoto = SystemUtil.formatBase64Image(photo);
 		JSONObject searchObj = aipFace.search(imagePhoto, "BASE64", DefaultGroup.DEFAULT.getGroupId(), options);
 		if (searchObj.getInt("error_code") != 0)
 			throw new FinalDesignException(searchObj.getInt("error_code"), searchObj.getString("error_msg"));

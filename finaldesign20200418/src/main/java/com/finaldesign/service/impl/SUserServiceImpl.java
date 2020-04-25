@@ -14,10 +14,10 @@ import com.finaldesign.group.DefaultGroup;
 import com.finaldesign.service.SUserService;
 import com.finaldesign.system.exception.FinalDesignException;
 import com.finaldesign.system.exception.SystemErr;
+import com.finaldesign.system.util.SystemUtil;
 
 @Service
 public class SUserServiceImpl implements SUserService {
-	private static final String PRE = "data:image/png;base64,";
 	@Autowired
 	private SUserMapper sUserMapper;
 	@Autowired
@@ -31,8 +31,7 @@ public class SUserServiceImpl implements SUserService {
 		options.put("quality_control", "LOW");
 		options.put("liveness_control", "LOW");
 		options.put("action_type", "REPLACE");
-		sUser.getuPhoto().indexOf(PRE);
-		String imagePhoto = sUser.getuPhoto().replaceAll(PRE, "");
+		String imagePhoto = SystemUtil.formatBase64Image(sUser.getuPhoto());
 		String userId = "userid_" + String.valueOf(sUser.getId());
 		JSONObject createUserObj = aipFace.addUser(imagePhoto, "BASE64", DefaultGroup.DEFAULT.getGroupId(), userId,
 				options);
@@ -60,7 +59,7 @@ public class SUserServiceImpl implements SUserService {
 			throw new FinalDesignException(SystemErr.SUSER_NOT_EXISTED);
 
 		HashMap<String, String> options = new HashMap<>();
-		String imagePhoto = sUser.getuPhoto().replaceAll(PRE, "");
+		String imagePhoto = SystemUtil.formatBase64Image(sUser.getuPhoto());
 		String userId = "userid_" + String.valueOf(sUser.getId());
 		JSONObject updateUserObj = aipFace.updateUser(imagePhoto, "BASE64", DefaultGroup.DEFAULT.getGroupId(), userId,
 				options);
